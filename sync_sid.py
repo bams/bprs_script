@@ -7,11 +7,11 @@ from datetime import datetime
 
 def argumen():
     args = None
-    parser = argparse.ArgumentParser(description='konversi SID a.k.a  SID converter to csv file\
+    parser = argparse.ArgumentParser(description='konversi SID a.k.a  SID converter from/to export SID file\
     by Bambang Yuliarso me@bakulnet.com')
     parser.add_argument('-i', '--input', help='input .csv/ SID export source name filename')
     parser.add_argument('-s', '--source', help='input .csv/ datasource name filename')
-    parser.add_argument('-f', '--form', help='input .csv/ datasource name filename')
+    parser.add_argument('-f', '--form', help='input .csv/ form report code')
     args = parser.parse_args()
     return args
 
@@ -44,8 +44,6 @@ def buatform33():
                     'status_kirim|versi|filler'
                 header = z
                 form33.write(header_kolom)
-                exportform33.write(header)
-#                 exportform33.write(enter)
                 form33.write(enter)
                 pass
             elif cocok_form33:
@@ -66,6 +64,7 @@ def buatform33():
                 form33.write(enter)
             else:
                 footer = z
+                exportform33.write(header+footer)
     form33.close()
 
 def sinkron():
@@ -95,23 +94,21 @@ def sinkron():
                     y['frekuensi_tunggakan_bunga'] = k['ft_bunga'].zfill(3)
                     y['agunan'] = k['agunan_nilai'].zfill(15)
                     n+=1
-            line_data = y['id_data']+y['operation']+y['id_lembaga']+y['id_bank']+\
-                y['id_kantor_cabang']+y['bulan']+y['tahun']+y['jenis_fasilitas']+y['id_fasilitas']+\
-                y['sifat']+y['no_rekening']+y['no_akad_awal']+y['tanggal_akad_awal']+\
-                y['no_akad_akhir']+y['tanggal_akad_akhir']+y['tanggal_awal_kredit']+\
-                y['tanggal_mulai']+y['tanggal_jatuh_tempo']+y['baru_perpanjangan']+\
-                y['golongan_kredit']+y['jenis_penggunaan']+y['orientasi_penggunaan']+\
-                y['sektor_ekonomi']+y['dati2_lokasi_proyek']+y['nilai_proyek']+y['id_valuta']+\
-                y['suku_bunga']+y['sifat_suku_bunga']+y['plafon_induk']+y['plafon']+\
-                y['baki_debet']+y['original_currency']+y['kelonggaran_tarik']+y['discount']+\
-                y['kolektibilitas']+y['tanggal_macet']+y['sebab_macet']+y['keterangan_sebab_macet']+\
-                y['tanggal_tunggakan']+y['tunggakan_pokok']+y['frekuensi_tunggakan_pokok']+\
-                y['tunggakanbunga_intra']+y['tunggakanbunga_ekstra']+y['frekuensi_tunggakan_bunga']+\
-                y['denda']+y['cerukan']+y['kondisi']+y['tanggal_kondisi']+y['agunan']+y['ppap']+\
-                y['kumulatif_realisasi']+y['tanggal_restrukturisasi']+y['restrukturisasi_ke']+\
-                y['restrukturisasi_awal']+y['kondisi_debitur']+y['permasalahan_debitur']+\
-                y['keterangan']+y['create_date']+y['create_user']+y['update_date']+y['status_kirim']+y['versi']+y['filler']
-
+            line_data = y['id_data']+y['operation']+y['id_lembaga']+y['id_bank']+y['id_kantor_cabang']+\
+                y['bulan']+y['tahun']+y['jenis_fasilitas']+y['id_fasilitas']+y['sifat']+y['no_rekening']+\
+                y['no_akad_awal']+y['tanggal_akad_awal']+y['no_akad_akhir']+y['tanggal_akad_akhir']+\
+                y['tanggal_awal_kredit']+y['tanggal_mulai']+y['tanggal_jatuh_tempo']+y['baru_perpanjangan']+\
+                y['golongan_kredit']+y['jenis_penggunaan']+y['orientasi_penggunaan']+y['sektor_ekonomi']+\
+                y['dati2_lokasi_proyek']+y['nilai_proyek']+y['id_valuta']+y['suku_bunga']+y['sifat_suku_bunga']+\
+                y['plafon_induk']+y['plafon']+y['baki_debet']+y['original_currency']+y['kelonggaran_tarik']+\
+                y['discount']+y['kolektibilitas']+y['tanggal_macet']+y['sebab_macet']+\
+                y['keterangan_sebab_macet']+y['tanggal_tunggakan']+y['tunggakan_pokok']+\
+                y['frekuensi_tunggakan_pokok']+y['tunggakanbunga_intra']+y['tunggakanbunga_ekstra']+\
+                y['frekuensi_tunggakan_bunga']+y['denda']+y['cerukan']+y['kondisi']+y['tanggal_kondisi']+\
+                y['agunan']+y['ppap']+y['kumulatif_realisasi']+y['tanggal_restrukturisasi']+\
+                y['restrukturisasi_ke']+y['restrukturisasi_awal']+y['kondisi_debitur']+\
+                y['permasalahan_debitur']+y['keterangan']+y['create_date']+y['create_user']+\
+                y['update_date']+y['status_kirim']+y['versi']+y['filler']
             tulis.append(line_data)
             exportform33.write(line_data)
             exportform33.write(enter)
